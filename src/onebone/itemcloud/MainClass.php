@@ -70,6 +70,7 @@ class MainClass extends PluginBase implements Listener{
 		foreach($data as $datam){
 			$this->clouds[$datam[1]] = new ItemCloud($datam[0], $datam[1]);
 		}
+		$this->getServer()->getPluginManager()->registerEvents($this,$this);
 	}
 
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $params) : bool{
