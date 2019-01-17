@@ -314,6 +314,7 @@ class sendItem extends Task{
 
 	function onRun(int $currentTick){
 		$name = $this->event->getPlayer()->getName();
+		$player = $this->event->getPlayer();
 		if(!$this->event->isCancelled()){
 			if(!isset($this->clouds[strtolower($name)])){
 				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
