@@ -239,10 +239,10 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "allonbreak":
 						if($sender->isOp()){
-							if($this->breakdate->exists(allbreakdate762919)){
+							if($this->breakdate->exists(allbreakdate)){
 								$sender->sendMessage("[Itemcloud] 既に有効です。");
 					                }else{
-							        $this->breakdate->set(allbreakdate762919, allbreak);
+							        $this->breakdate->set(allbreakdate, allbreak);
 							        $this->breakdate->save();
 							        $this->breakdate->reload();
 						                $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
@@ -253,10 +253,10 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "alloffbreak":
 						if($sender->isOp()){
-							if(!$this->breakdate->exists(allbreakdate762919)){
+							if(!$this->breakdate->exists(allbreakdate)){
 								$sender->sendMessage("[Itemcloud] 既に無効です。");
 					                }else{
-							        $this->breakdate->remove(allbreakdate762919);
+							        $this->breakdate->remove(allbreakdate);
 						      	        $this->breakdate->save();
 							        $this->breakdate->reload();
 						                $sender->sendMessage("[ItemCloud] 全員を対象とする設定が無効になりました。");
@@ -280,7 +280,7 @@ class MainClass extends PluginBase implements Listener{
 			if($this->breakdate->exists($name)){
 				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 			}else{
-				if($this->breakdate->exists(allbreakdate762919)){
+				if($this->breakdate->exists(allbreakdate)){
 					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 				}
 	                }
