@@ -222,6 +222,7 @@ class MainClass extends PluginBase implements Listener{
 							$this->breakdate->save();
 							$this->breakdate->reload();
 						        $sender->sendMessage("[ItemCloud] ブロックを壊すと直接アイテムクラウドに行くようになりました。");
+						}
 						break;
 					case "offbreak":
 						$user_name = $sender->getName();
@@ -230,6 +231,8 @@ class MainClass extends PluginBase implements Listener{
 						}else{
 							$this->breakdate->remove($user_name);
 							$sender->sendMesaage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
+						}
+						break:
 					case "allonbreak":
 						$allbreak = allbreakdate762919
 						if($sender->isOp());
@@ -239,8 +242,27 @@ class MainClass extends PluginBase implements Listener{
 							   $this->breakdate->set($allbreak, allbreak);
 							   $this->breakdate->save();
 							   $this->breakdate->reload();
-							   $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようにになりました");。
-					default:
+						           $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
+							}
+	     			  	        }else{
+							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
+						}
+						break:
+					case "alloffbreak"
+						if($sender->isOp){
+							if(!$this->breakdate->exists($allbreak);
+							   $sender->sendMesaage("[Itemcloud] 既に無効です。");
+					                }else{
+							   $this->breakdate->remove($allbreak);
+							   $this->breakdate->save();
+							   $this->breakdate->reload();
+						           $sender->sendMessage("[ItemCloud] 全員を対象とする設定が無効になりました。");
+							}
+	     			  	        }else{
+							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
+						}
+						break:
+			  	        default:
 						$sender->sendMessage("[ItemCloud] Usage: " . $command->getUsage());
 				}
 				return true;
@@ -252,13 +274,25 @@ class MainClass extends PluginBase implements Listener{
 		$player = $event->getPlayer();
 		$name = $player->getName();
 		if (!$player->isOp()){
-			if(!isset($this->clouds[strtolower($name)])){
-				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
-				$event->setCancelled();
-		        }else{
-				$event->setDrops([]);
-			        $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
-			}
+			if($this->breakdate->exists($name){
+				if(!isset($this->clouds[strtolower($name)])){
+					$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+				        $event->setCancelled();
+		                }else{
+				        $event->setDrops([]);
+			                $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+				}
+			}else{
+				if($this->breakdate->exists($allbreak){
+					if(!isset($this->clouds[strtolower($name)])){
+						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+						$event->setCancelled();
+					}else{
+						$event->setDrops([]);
+						$this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+					}
+				}
+	                }
 		}
 	}
 
