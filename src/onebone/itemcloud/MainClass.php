@@ -233,7 +233,7 @@ class MainClass extends PluginBase implements Listener{
 							$this->breakdate->remove($user_name);
 							$sender->sendMesaage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
 						}
-						break:
+						break;
 					case "allonbreak":
 						$allbreak = allbreakdate762919;
 						if($sender->isOp());
@@ -248,7 +248,7 @@ class MainClass extends PluginBase implements Listener{
 	     			  	        }else{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
 						}
-						break:
+						break;
 					case "alloffbreak"
 						if($sender->isOp){
 							if(!$this->breakdate->exists($allbreak);
@@ -262,7 +262,7 @@ class MainClass extends PluginBase implements Listener{
 	     			  	        }else{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
 						}
-						break:
+						break;
 			  	        default:
 						$sender->sendMessage("[ItemCloud] Usage: " . $command->getUsage());
 				}
