@@ -249,7 +249,7 @@ class MainClass extends PluginBase implements Listener{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
 						}
 						break;
-					case "alloffbreak"
+					case "alloffbreak":
 						if($sender->isOp()){
 							if(!$this->breakdate->exists($allbreak)){
 								$sender->sendMessage("[Itemcloud] 既に無効です。");
