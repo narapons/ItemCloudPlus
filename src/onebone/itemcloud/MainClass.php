@@ -313,7 +313,7 @@ class sendItem extends Task{
 	}
 
 	function onRun(int $currentTick){
-		$event = onBreak->event;
+		$event = onBreak->$event;
 		$name = $this->event->getPlayer()->getName();
 		$player = $this->event->getPlayer();
 		if(!$this->event->isCancelled()){
