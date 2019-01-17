@@ -33,7 +33,7 @@ class ItemCloud{
 	 * @return bool
 	 */
 	public function addItem($id, $damage, $count, $removeInv = true){
-		/*if($removeInv === true){
+		if($removeInv === true){
 			$p = $this->server->getPlayerExact($this->player);
 			if(!$p instanceof Player){
 				return false;
@@ -49,8 +49,16 @@ class ItemCloud{
 				}
 			}
 		}
-		*/
 
+		if(isset($this->items[$id . ":" . $damage])){
+			$this->items[$id . ":" . $damage] += $count;
+		}else{
+			$this->items[$id . ":" . $damage] = $count;
+		}
+		return true;
+	}
+	
+	public function addItemBreak($id, $damage, $count, $removeInv = true){
 		if(isset($this->items[$id . ":" . $damage])){
 			$this->items[$id . ":" . $damage] += $count;
 		}else{
