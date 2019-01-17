@@ -9,6 +9,7 @@ use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
+use pocketmine\event\block\BlockBreakEvent;
 
 class MainClass extends PluginBase implements Listener{
 	/**
@@ -215,6 +216,16 @@ class MainClass extends PluginBase implements Listener{
 				return true;
 		}
 		return true;
+	}
+	
+	public function onBreak(BlockBreakEvent $event){
+		$player = $event->getPlayer();
+		$name = $player->getName();
+		if(!isset($this->clouds[strtolower($name)])){
+			$player->sendMessage("[ItemCloud] Please register to the ItemCloud service first.");
+		}else{
+			$this->clouds[strtolower($name)]->addItem($event->getID(), $event->getDamage(), 1, true);
+		}
 	}
 
 	public function save(){
