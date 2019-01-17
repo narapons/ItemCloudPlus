@@ -229,7 +229,7 @@ class MainClass extends PluginBase implements Listener{
 				$event->setCancelled();
 		        }else{
 				$event->setDrops([]);
-			        $this->clouds[strtolower($name)]->addItem($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+			        $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
 			}
 		}
 	}
