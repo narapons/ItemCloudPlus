@@ -273,6 +273,7 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
+		$allbreak = allbreakdate762919
 		if (!$player->isOp()){
 			if($this->breakdate->exists($name){
 				if(!isset($this->clouds[strtolower($name)])){
