@@ -279,10 +279,10 @@ class MainClass extends PluginBase implements Listener{
 		$item = $event->getBlock();
 		if (!$player->isOp()){
 			if($this->breakdate->exists($name)){
-				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
+				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $name, $item, $event->getBlock(), $event), 1);
 			}else{
 				if($this->breakdate->exists("allbreakdate")){
-					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
+					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $name, $item, $event->getBlock(), $event), 1);
 				}
 	                }
 		}
@@ -304,9 +304,9 @@ class MainClass extends PluginBase implements Listener{
 				   
 class sendItem extends Task{
 
-	function __construct(PluginBase $owner, $player, $item, $block, $event){
+	function __construct(PluginBase $owner, $name, $item, $block, $event){
 		$this->owner = $owner;
-		$this->player = $player;
+		$this->name = $name;
 		$this->item = $item;
 		$this->block = $block;
 		$this->event = $event;
