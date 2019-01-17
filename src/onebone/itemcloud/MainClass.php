@@ -238,7 +238,7 @@ class MainClass extends PluginBase implements Listener{
 						$allbreak = allbreakdate762919;
 						if($sender->isOp());
 							if($this->breakdate->exists($allbreak){
-							   $sender->sendMesaage("[Itemcloud] 既に有効です。");
+							   $sender->sendMessage("[Itemcloud] 既に有効です。");
 					                }else{
 							   $this->breakdate->set($allbreak, allbreak);
 							   $this->breakdate->save();
@@ -252,7 +252,7 @@ class MainClass extends PluginBase implements Listener{
 					case "alloffbreak"
 						if($sender->isOp){
 							if(!$this->breakdate->exists($allbreak){
-							   $sender->sendMesaage("[Itemcloud] 既に無効です。");
+							   $sender->sendMessage("[Itemcloud] 既に無効です。");
 					                }else{
 							   $this->breakdate->remove($allbreak);
 							   $this->breakdate->save();
