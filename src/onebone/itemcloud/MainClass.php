@@ -276,7 +276,7 @@ class MainClass extends PluginBase implements Listener{
 		$name = $player->getName();
 		$allbreak = allbreakdate762919;
 		if (!$player->isOp()){
-			if($this->breakdate->exists($name){
+			if($this->breakdate->exists($name)){
 				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 			}else{
 				if($this->breakdate->exists($allbreak)){
