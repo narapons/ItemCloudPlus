@@ -234,7 +234,7 @@ class MainClass extends PluginBase implements Listener{
 						}
 						break:
 					case "allonbreak":
-						$allbreak = allbreakdate762919
+						$allbreak = allbreakdate762919;
 						if($sender->isOp());
 							if($this->breakdate->exists($allbreak);
 							   $sender->sendMesaage("[Itemcloud] 既に有効です。");
@@ -273,7 +273,7 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$allbreak = allbreakdate762919
+		$allbreak = allbreakdate762919;
 		if (!$player->isOp()){
 			if($this->breakdate->exists($name){
 				if(!isset($this->clouds[strtolower($name)])){
