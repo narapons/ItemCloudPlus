@@ -313,7 +313,7 @@ class sendItem extends Task{
 	}
 
 	function onRun(int $currentTick){
-		$event = $this->event;
+		$event = onBreak->event;
 		$name = $this->event->getPlayer()->getName();
 		$player = $this->event->getPlayer();
 		if(!$this->event->isCancelled()){
@@ -322,7 +322,7 @@ class sendItem extends Task{
 				$event->setCancelled();
 			}else{
 				$event->setDrops([]);
-			        $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+			        onBreak->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
 			}
 		}
 	}
