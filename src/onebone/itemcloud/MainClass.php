@@ -226,7 +226,7 @@ class MainClass extends PluginBase implements Listener{
 		if(!isset($this->clouds[strtolower($name)])){
 			$player->sendMessage("[ItemCloud] Please register to the ItemCloud service first.");
 		}else{
-			$this->clouds[strtolower($name)]->addItem($event->getBlock()->getID(), $event->getBlock->()getDamage(), 1, true);
+			$this->clouds[strtolower($name)]->addItem($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
 		}
 	}
 
