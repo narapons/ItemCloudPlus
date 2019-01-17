@@ -239,7 +239,7 @@ class MainClass extends PluginBase implements Listener{
 							   $this->breakdate->set($allbreak, allbreak);
 							   $this->breakdate->save();
 							   $this->breakdate->reload();
-							   $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くよう。
+							   $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。
 					default:
 						$sender->sendMessage("[ItemCloud] Usage: " . $command->getUsage());
 				}
