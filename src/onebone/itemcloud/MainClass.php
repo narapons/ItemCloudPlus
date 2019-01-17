@@ -72,6 +72,7 @@ class MainClass extends PluginBase implements Listener{
 			$this->clouds[$datam[1]] = new ItemCloud($datam[0], $datam[1]);
 		}
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);
+		$this->breakdate = new Config($this->getDataFolder() ."BreakDate.yml", Config::YAML);
 	}
 
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $params) : bool{
@@ -212,6 +213,33 @@ class MainClass extends PluginBase implements Listener{
 							$sender->sendMessage("[ItemCloud] Count of " . $item->getName() . " = " . $count);
 						}
 						break;
+					case "onbreak":
+						$user_name = $sender->getName();
+						if($this->breakdate->exists($user_name)){
+							$sender->sendMessage("[ItemCloud] 既に有効です。");
+						}else{
+							$this->breakdate->set($user_name,count($this->breakdate->getAll())+1);
+							$this->breakdate->save();
+							$this->breakdate->reload();
+						        $sender->sendMessage("[ItemCloud] ブロックを壊すと直接アイテムクラウドに行くようになりました。");
+						break;
+					case "offbreak":
+						$user_name = $sender->getName();
+						if(!$this->breakdate->exists($user_name)){
+							$sender->sendMessage("[ItemCloud] 既に無効です。");
+						}else{
+							$this->breakdate->remove($user_name);
+							$sender->sendMesaage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
+					case "allonbreak":
+						$allbreak = allbreakdate762919
+						if($sender->isOp());
+							if($this->breakdate->exists($allbreak);
+							   $sender->sendMesaage("[Itemcloud] 既に有効です。");
+					                }else{
+							   $this->breakdate->set($allbreak, allbreak);
+							   $this->breakdate->save();
+							   $this->breakdate->reload();
+							   $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くよう。
 					default:
 						$sender->sendMessage("[ItemCloud] Usage: " . $command->getUsage());
 				}
