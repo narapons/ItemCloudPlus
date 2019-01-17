@@ -237,7 +237,7 @@ class MainClass extends PluginBase implements Listener{
 					case "allonbreak":
 						$allbreak = allbreakdate762919;
 						if($sender->isOp()){
-							if($this->breakdate->exists($allbreak){
+							if($this->breakdate->exists($allbreak)){
 								$sender->sendMessage("[Itemcloud] 既に有効です。");
 					                }else{
 							        $this->breakdate->set($allbreak, allbreak);
@@ -251,7 +251,7 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "alloffbreak"
 						if($sender->isOp()){
-							if(!$this->breakdate->exists($allbreak){
+							if(!$this->breakdate->exists($allbreak)){
 								$sender->sendMessage("[Itemcloud] 既に無効です。");
 					                }else{
 							        $this->breakdate->remove($allbreak);
@@ -279,7 +279,7 @@ class MainClass extends PluginBase implements Listener{
 			if($this->breakdate->exists($name){
 				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 			}else{
-				if($this->breakdate->exists($allbreak){
+				if($this->breakdate->exists($allbreak)){
 					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 				}
 	                }
