@@ -11,6 +11,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\block\BlockIds;
+use pocketmine\scheduler\Task;
 
 class MainClass extends PluginBase implements Listener{
 	/**
@@ -276,22 +277,10 @@ class MainClass extends PluginBase implements Listener{
 		$allbreak = allbreakdate762919;
 		if (!$player->isOp()){
 			if($this->breakdate->exists($name){
-				if(!isset($this->clouds[strtolower($name)])){
-					$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
-				        $event->setCancelled();
-		                }else{
-				        $event->setDrops([]);
-			                $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
-				}
+				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 			}else{
 				if($this->breakdate->exists($allbreak){
-					if(!isset($this->clouds[strtolower($name)])){
-						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
-						$event->setCancelled();
-					}else{
-						$event->setDrops([]);
-						$this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
-					}
+					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $player, $item, $event->getBlock(), $event), 1);
 				}
 	                }
 		}
@@ -308,5 +297,28 @@ class MainClass extends PluginBase implements Listener{
 	public function onDisable(){
 		$this->save();
 		$this->clouds = [];
+	}
+}
+				   
+class sendItem extends Task{
+
+	function __construct(PluginBase $owner, $player, $item, $block, $event){
+		$this->owner = $owner;
+		$this->player = $player;
+		$this->item = $item;
+		$this->block = $block;
+		$this->event = $event;
+	}
+
+	function onRun(int $currentTick){
+		if(!$this->event->isCancelled()){
+			if(!isset($this->clouds[strtolower($name)])){
+				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+				$event->setCancelled();
+			}else{
+				$event->setDrops([]);
+			        $this->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+			}
+		}
 	}
 }
