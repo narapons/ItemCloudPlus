@@ -12,6 +12,9 @@ use pocketmine\utils\TextFormat;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\block\BlockIds;
 use pocketmine\scheduler\Task;
+use pocketmine\utils\Utils;
+use pocketmine\utils\Config;
+
 
 class MainClass extends PluginBase implements Listener{
 	/**
@@ -57,6 +60,7 @@ class MainClass extends PluginBase implements Listener{
 	}
 
 	public function onEnable(){
+		$this->breakdate = new Config($this->getDataFolder() ."BreakDate.yml", Config::YAML);
 		@mkdir($this->getDataFolder());
 		if(!is_file($this->getDataFolder() . "ItemCloud.dat")){
 			file_put_contents($this->getDataFolder() . "ItemCloud.dat", serialize([]));
@@ -73,7 +77,6 @@ class MainClass extends PluginBase implements Listener{
 			$this->clouds[$datam[1]] = new ItemCloud($datam[0], $datam[1]);
 		}
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);
-		$this->breakdate = new Config($this->getDataFolder() ."BreakDate.yml", Config::YAML);
 	}
 
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $params) : bool{
