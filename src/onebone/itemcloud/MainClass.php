@@ -238,12 +238,12 @@ class MainClass extends PluginBase implements Listener{
 						$allbreak = allbreakdate762919;
 						if($sender->isOp());
 							if($this->breakdate->exists($allbreak){
-							   $sender->sendMessage("[Itemcloud] 既に有効です。");
+								$sender->sendMessage("[Itemcloud] 既に有効です。");
 					                }else{
-							   $this->breakdate->set($allbreak, allbreak);
-							   $this->breakdate->save();
-							   $this->breakdate->reload();
-						           $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
+							        $this->breakdate->set($allbreak, allbreak);
+							        $this->breakdate->save();
+							        $this->breakdate->reload();
+						                $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
 							}
 	     			  	        }else{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
@@ -252,12 +252,12 @@ class MainClass extends PluginBase implements Listener{
 					case "alloffbreak"
 						if($sender->isOp){
 							if(!$this->breakdate->exists($allbreak){
-							   $sender->sendMessage("[Itemcloud] 既に無効です。");
+								$sender->sendMessage("[Itemcloud] 既に無効です。");
 					                }else{
-							   $this->breakdate->remove($allbreak);
-							   $this->breakdate->save();
-							   $this->breakdate->reload();
-						           $sender->sendMessage("[ItemCloud] 全員を対象とする設定が無効になりました。");
+							        $this->breakdate->remove($allbreak);
+						      	        $this->breakdate->save();
+							        $this->breakdate->reload();
+						                $sender->sendMessage("[ItemCloud] 全員を対象とする設定が無効になりました。");
 							}
 	     			  	        }else{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
