@@ -313,16 +313,16 @@ class sendItem extends Task{
 	}
 
 	function onRun(int $currentTick){
-		$event = onBreak->$event;
+		$event = ???->$event; //onBreakのイベントを取得したい
 		$name = $this->event->getPlayer()->getName();
 		$player = $this->event->getPlayer();
 		if(!$this->event->isCancelled()){
-			if(!isset(onBreak->clouds[strtolower($name)])){
+			if(!isset(???->clouds[strtolower($name)])){//Mainクラスからやりたい
 				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
 				$event->setCancelled();
 			}else{
 				$event->setDrops([]);
-			        onBreak->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);
+			        ???->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);//Mainクラスからやりたい
 			}
 		}
 	}
