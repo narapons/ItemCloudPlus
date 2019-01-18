@@ -25,7 +25,7 @@ class MainClass extends PluginBase implements Listener{
 	/**
 	 * @var ItemCloud[]
 	 */
-	private $clouds;
+	public $clouds;
 
 	/**
 	 * @return MainClass
