@@ -316,7 +316,7 @@ class sendItem extends Task{
 		$event = $this->event;
 		$name = $this->event->getPlayer()->getName();
 		$player = $this->event->getPlayer();
-		$onBreak = $this->owner->onBreak()->event;
+		$onBreak = $this->owner->onBreak()->$event;
 		if(!$onBreak->isCancelled()){
 			if(!isset($this->owner->clouds[strtolower($name)])){//Mainクラスからやりたい
 				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
