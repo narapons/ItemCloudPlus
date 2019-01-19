@@ -277,7 +277,6 @@ class MainClass extends PluginBase implements Listener{
 		$player = $event->getPlayer();
 		$name = $player->getName();
 		$item = $event->getBlock();
-		$onBreak = $event;
 		if (!$player->isOp()){
 			if($this->breakdate->exists($name)){
 				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $name, $item, $event->getBlock(), $event), 1);
@@ -317,7 +316,7 @@ class sendItem extends Task{
 		$event = $this->event;
 		$name = $this->event->getPlayer()->getName();
 		$player = $this->event->getPlayer();
-		$onBreak = $this->owner->onBreak();
+		$onBreak = $this->owner->onBreak()->event;
 		if(!$onBreak->isCancelled()){
 			if(!isset($this->owner->clouds[strtolower($name)])){//Mainクラスからやりたい
 				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
