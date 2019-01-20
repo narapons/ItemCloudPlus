@@ -11,7 +11,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\block\BlockIds;
-use pocketmine\scheduler\Task;
 use pocketmine\utils\Utils;
 use pocketmine\utils\Config;
 
@@ -278,11 +277,24 @@ class MainClass extends PluginBase implements Listener{
 		$name = $player->getName();
 		$item = $event->getBlock();
 		if (!$player->isOp()){
-			if($this->breakdate->exists($name)){
-				$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $name, $item, $event->getBlock(), $event), 1);
-			}else{
+			if(!$this->isCancelled()){
+				if($this->breakdate->exists($name)){
+					if(!isset($this->clouds[strtolower($name)])){
+						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+				                $event->setCancelled();
+				        }else{
+					        $event->setDrops([]);
+			                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+					}
+				}
 				if($this->breakdate->exists("allbreakdate")){
-					$this->getScheduler()->scheduleDelayedTask(new sendItem($this, $name, $item, $event->getBlock(), $event), 1);
+					if(!isset($this->clouds[strtolower($name)])){
+						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+				                $event->setCancelled();
+				        }else{
+					        $event->setDrops([]);
+			                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+					}
 				}
 	                }
 		}
@@ -299,32 +311,5 @@ class MainClass extends PluginBase implements Listener{
 	public function onDisable(){
 		$this->save();
 		$this->clouds = [];
-	}
-}
-				   
-class sendItem extends Task{
-
-	function __construct(PluginBase $owner, $name, $item, $block, $event){
-		$this->owner = $owner;
-		$this->name = $name;
-		$this->item = $item;
-		$this->block = $block;
-		$this->event = $event;
-	}
-
-	function onRun(int $currentTick){
-		$event = $this->event;
-		$name = $this->event->getPlayer()->getName();
-		$player = $this->event->getPlayer();
-		$onBreak = $this->owner->onBreak()->$event;
-		if(!$onBreak->isCancelled()){
-			if(!isset($this->owner->clouds[strtolower($name)])){//Mainクラスからやりたい
-				$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
-				$onBreak->setCancelled();
-			}else{
-				$event->setDrops([]);
-			        $this->owner->clouds[strtolower($name)]->addItemBreak($event->getBlock()->getID(), $event->getBlock()->getDamage(), 1, true);//Mainクラスからやりたい
-			}
-		}
 	}
 }
