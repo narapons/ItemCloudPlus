@@ -277,7 +277,7 @@ class MainClass extends PluginBase implements Listener{
 		$name = $player->getName();
 		$item = $event->getBlock();
 		if (!$player->isOp()){
-			if($this->isCancelled()){
+			if(!$this->isCancelled()){
 				if($this->breakdate->exists($name)){
 					if(!isset($this->clouds[strtolower($name)])){
 						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
