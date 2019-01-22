@@ -286,16 +286,80 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$item = $event->getBlock();
+		$block = $event->getBlock()
+		$IDs = $block->getID();
+		$Dam = $block->getDamage();
+                $data = $this->config->get("ID");
+                $item = explode(":",$data[0]);
+                $ID1 = var_dump($item[0]);//アイテムID
+                $IDD1 = var_dump($item[1]);//ダメージID
+                $item = explode(":",$data[1]);
+                $ID2 = var_dump($item[0]);
+                $IDD2 = var_dump($item[1]);
+		$item = explode(":",$data[2]);
+		$ID3 = var_dump($item[0]);
+		$IDD3 = var_dump($item[1]);
+		$item = explode(":",$data[3]);
+                $ID4 = var_dump($item[0]);
+                $IDD4 = var_dump($item[1]);
+		$item = explode(":",$data[4]);
+                $ID5 = var_dump($item[0]);
+                $IDD5 = var_dump($item[1]);
+		$item = explode(":",$data[5]);
+                $ID6 = var_dump($item[0]);
+                $IDD6 = var_dump($item[1]);
+		$item = explode(":",$data[6]);
+                $ID7 = var_dump($item[0]);
+                $IDD7 = var_dump($item[1]);
+		$item = explode(":",$data[7]);
+                $ID8 = var_dump($item[0]);
+                $IDD8 = var_dump($item[1]);
+		$item = explode(":",$data[8]);
+                $ID9 = var_dump($item[0]);
+                $IDD9 = var_dump($item[1]);
+		$item = explode(":",$data[9]);
+                $ID10 = var_dump($item[0]);
+                $IDD10 = var_dump($item[1]);
+		$item = explode(":",$data[10]);
+                $ID11 = var_dump($item[0]);
+                $IDD11 = var_dump($item[1]);
+		$item = explode(":",$data[11]);
+                $ID12 = var_dump($item[0]);
+                $IDD12 = var_dump($item[1]);
+		$item = explode(":",$data[12]);
+                $ID13 = var_dump($item[0]);
+                $IDD13 = var_dump($item[1]);
+		$item = explode(":",$data[13]);
+                $ID14 = var_dump($item[0]);
+                $IDD14 = var_dump($item[1]);
+		$item = explode(":",$data[14]);
+                $ID15 = var_dump($item[0]);
+                $IDD15 = var_dump($item[1]);
+		$item = explode(":",$data[15]);
+                $ID16 = var_dump($item[0]);
+                $IDD16 = var_dump($item[1]);
+		$item = explode(":",$data[16]);
+                $ID17 = var_dump($item[0]);
+                $IDD17 = var_dump($item[1]);
+		$item = explode(":",$data[17]);
+                $ID18 = var_dump($item[0]);
+                $IDD18 = var_dump($item[1]);
+		$item = explode(":",$data[18]);
+                $ID19 = var_dump($item[0]);
+                $IDD19 = var_dump($item[1]);
+		$item = explode(":",$data[19]);
+                $ID20 = var_dump($item[0]);
+                $IDD20 = var_dump($item[1]); //CheckID.ymlの取得
 		if (!$player->isOp()){
 			if(!$event->isCancelled()){
+			   if($ID1 == $IDs, $IDD1 == $Dam or $ID2 == $IDs, $IDD2 == $Dam or $ID3 == $IDs, $IDD3 == $Dam or $ID4 == $IDs, $IDD4 == $Dam or $ID5 == $IDs, $IDD5 == $Dam or $ID6 == $IDs, $IDD6 == $Dam or $ID7 == $IDs, $IDD7 == $Dam or $ID8 == $IDs, $IDD8 == $Dam or $ID9 == $IDs, $IDD9 == $Dam or $ID10 == $IDs, $IDD10 == $Dam or $ID11 == $IDs, $IDD11 == $Dam or $ID12 == $IDs, $IDD12 == $Dam or $ID13 == $IDs, $IDD13 == $Dam or $ID14 == $IDs, $IDD14 == $Dam or $ID15 == $IDs, $IDD15 == $Dam or $ID16 == $IDs, $IDD16 == $Dam or $ID17 == $IDs, $IDD17 == $Dam or $ID18 == $IDs, $IDD18 == $Dam or $ID19 == $IDs, $IDD19 == $Dam or $ID20 == $IDs, $IDD20 == $Dam){
 				if($this->breakdate->exists($name)){
 					if(!isset($this->clouds[strtolower($name)])){
 						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
 				                $event->setCancelled();
 				        }else{
 					        $event->setDrops([]);
-			                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+			                        $this->clouds[strtolower($name)]->addItemBreak($block->getID(), $block->getDamage(), 1, true);
 					}
 				}
 				if($this->breakdate->exists("allbreakdate")){
@@ -304,9 +368,10 @@ class MainClass extends PluginBase implements Listener{
 				                $event->setCancelled();
 				        }else{
 					        $event->setDrops([]);
-			                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+			                        $this->clouds[strtolower($name)]->addItemBreak($block->getID(), $block->getDamage(), 1, true);
 					}
 				}
+			   }
 	                }
 		}
 	}
