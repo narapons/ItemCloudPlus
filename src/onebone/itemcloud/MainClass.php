@@ -286,7 +286,7 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$block = $event->getBlock()
+		$block = $event->getBlock();
 		$IDs = $block->getID();
 		$Dam = $block->getDamage();
                 $data = $this->CheckID->get("ID");
