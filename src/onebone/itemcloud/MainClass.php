@@ -289,7 +289,7 @@ class MainClass extends PluginBase implements Listener{
 		$block = $event->getBlock()
 		$IDs = $block->getID();
 		$Dam = $block->getDamage();
-                $data = $this->config->get("ID");
+                $data = $this->CheckID->get("ID");
                 $item = explode(":",$data[0]);
                 $ID1 = var_dump($item[0]);//アイテムID
                 $IDD1 = var_dump($item[1]);//ダメージID
