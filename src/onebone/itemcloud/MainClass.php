@@ -60,6 +60,9 @@ class MainClass extends PluginBase implements Listener{
 
 	public function onEnable(){
 		$this->breakdate = new Config($this->getDataFolder() ."BreakDate.yml", Config::YAML);
+		$this->CheckID = new Config(
+			$this->getDataFolder() . "CheckID.yml", Config::YAML, array(
+				"ID"=> ["1:0","2:0","3:0","4:0","5:0","6:0","10:0","11:0","12:0","13:0","14:0","15:0","16:0","17:0","18:0","19:0","20:0"]));
 		@mkdir($this->getDataFolder());
 		if(!is_file($this->getDataFolder() . "ItemCloud.dat")){
 			file_put_contents($this->getDataFolder() . "ItemCloud.dat", serialize([]));
