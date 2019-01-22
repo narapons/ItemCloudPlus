@@ -218,22 +218,30 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "onbreak":
 						$user_name = $sender->getName();
-						if($this->breakdate->exists($user_name)){
-							$sender->sendMessage("[ItemCloud] 既に有効です。");
+						if(!$this->breakdate->exists("allbreakdate")){
+							if($this->breakdate->exists($user_name)){
+								$sender->sendMessage("[ItemCloud] 既に有効です。");
+						        }else{
+								$this->breakdate->set($user_name,count($this->breakdate->getAll())+1);
+							        $this->breakdate->save();
+							        $this->breakdate->reload();
+						                $sender->sendMessage("[ItemCloud] ブロックを壊すと直接アイテムクラウドに行くようになりました。");
+						        }
 						}else{
-							$this->breakdate->set($user_name,count($this->breakdate->getAll())+1);
-							$this->breakdate->save();
-							$this->breakdate->reload();
-						        $sender->sendMessage("[ItemCloud] ブロックを壊すと直接アイテムクラウドに行くようになりました。");
+							$sender->sendMessage("[ItemCloud] 管理者によって設定が固定されているため変更できません");
 						}
 						break;
 					case "offbreak":
 						$user_name = $sender->getName();
-						if(!$this->breakdate->exists($user_name)){
-							$sender->sendMessage("[ItemCloud] 既に無効です。");
+						if(!$this->breakdate->exists("allbreakdate")){
+							if(!$this->breakdate->exists($user_name)){
+								$sender->sendMessage("[ItemCloud] 既に無効です。");
+						        }else{
+							        $this->breakdate->remove($user_name);
+								$sender->sendMessage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
+						        }
 						}else{
-							$this->breakdate->remove($user_name);
-							$sender->sendMessage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
+							$sender->sendMessage("[ItemCloud] 管理者によって設定が固定されているため変更できません");
 						}
 						break;
 					case "allonbreak":
