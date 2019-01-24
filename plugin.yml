@@ -1,6 +1,6 @@
 ---
 name: ItemCloud
-version: 1.4.0_setitemID
+version: 1.4.0_setItemID
 author: onebone
 api: 3.0.0
 main: onebone\itemcloud\MainClass
