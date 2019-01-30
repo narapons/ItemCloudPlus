@@ -358,7 +358,7 @@ class MainClass extends PluginBase implements Listener{
 				if (!$player->isOp()){
 					if(!$event->isCancelled()){
 			// if($ID1 == $IDs && $IDD1 == $Dam || $ID2 == $IDs && $IDD2 == $Dam || $ID3 == $IDs && $IDD3 == $Dam || $ID4 == $IDs && $IDD4 == $Dam || $ID5 == $IDs && $IDD5 == $Dam || $ID6 == $IDs && $IDD6 == $Dam || $ID7 == $IDs && $IDD7 == $Dam || $ID8 == $IDs && $IDD8 == $Dam || $ID9 == $IDs && $IDD9 == $Dam || $ID10 == $IDs && $IDD10 == $Dam || $ID11 == $IDs && $IDD11 == $Dam || $ID12 == $IDs && $IDD12 == $Dam || $ID13 == $IDs && $IDD13 == $Dam || $ID14 == $IDs && $IDD14 == $Dam || $ID15 == $IDs && $IDD15 == $Dam || $ID16 == $IDs && $IDD16 == $Dam || $ID17 == $IDs && $IDD17 == $Dam || $ID18 == $IDs && $IDD18 == $Dam || $ID19 == $IDs && $IDD19 == $Dam || $ID20 == $IDs && $IDD20 == $Dam){
-						if($this->breakdate->exists($name)){
+						if($this->breakdate->exists($name) || $this->breakdate->exists("allbreakdate")){
 							if(!isset($this->clouds[strtolower($name)])){
 								$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
 				                                $event->setCancelled();
@@ -367,15 +367,6 @@ class MainClass extends PluginBase implements Listener{
 			                                        $this->clouds[strtolower($name)]->addItemBreak($block->getID(), $block->getDamage(), 1, true);
 					                }
 				                }
-				                if($this->breakdate->exists("allbreakdate")){
-							if(!isset($this->clouds[strtolower($name)])){
-								$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
-				                                $event->setCancelled();
-				                        }else{
-					                        $event->setDrops([]);
-			                                        $this->clouds[strtolower($name)]->addItemBreak($block->getID(), $block->getDamage(), 1, true);
-							}
-						}
 					}
 				}
 			}
