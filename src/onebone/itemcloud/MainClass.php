@@ -273,7 +273,7 @@ class MainClass extends PluginBase implements Listener{
 						}
 						break;
 					case "all":
-						if(!isset($this->clouds[strtolower($name)])){
+						if(!isset($this->clouds[strtolower($sender->getName())])){
 							$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
 						}else{
 							$si = $sender->getInventory()->getSize();
