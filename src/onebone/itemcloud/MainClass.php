@@ -272,6 +272,22 @@ class MainClass extends PluginBase implements Listener{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
 						}
 						break;
+					case "all":
+						if(!isset($this->clouds[strtolower($name)])){
+							$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+						}else{
+							$si = $sender->getInventory()->getSize();
+							for($is = 1; $is <= $si; ++$is){
+								$item = $sender->getInventory()->getItem($is-1);
+								$i = 1;
+								if($item->getID !== 0){
+									$this->clouds[strtolower($sender->getName())]->addItemBreak($item->getID(), $item->getDamage(), $item->getCount(), true);
+								}
+							}	
+							$sender->getInventory()->clearAll();
+							$sender->sendMessage("[ItemClude] インベントリにあるアイテムをすべてアップロードしました");
+						}
+						break;	
 			  	        default:
 						$sender->sendMessage("[ItemCloud] Usage: " . $command->getUsage());
 				}
