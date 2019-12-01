@@ -279,9 +279,12 @@ class MainClass extends PluginBase implements Listener{
 							$si = $sender->getInventory()->getSize();
 							for($is = 1; $is <= $si; ++$is){
 								$item = $sender->getInventory()->getItem($is-1);
+								$id = $item->getId();
+								$meta = $item->getDamage();
+								$count = $item->getCount();
 								$i = 1;
-								if($item->getID !== 0){
-									$this->clouds[strtolower($sender->getName())]->addItemBreak($item->getID(), $item->getDamage(), $item->getCount(), true);
+								if($id !== 0){
+									$this->clouds[strtolower($sender->getName())]->addItemBreak($id, $meta, $count, true);
 								}
 							}	
 							$sender->getInventory()->clearAll();
