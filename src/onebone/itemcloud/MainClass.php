@@ -303,7 +303,7 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$item = $event->getBlock();
+		$item = $event->getDrops();
                 $level=$player->getLevel();
                 $x = floor($player->getX());
                 $z = floor($player->getZ());
@@ -317,7 +317,9 @@ class MainClass extends PluginBase implements Listener{
 				                $event->setCancelled();
 				        }else{
 					        $event->setDrops([]);
-			                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+                                                foreach($drop as $item){
+                                                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+                                                }
 					}
 				}
 	                }
