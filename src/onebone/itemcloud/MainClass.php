@@ -303,7 +303,7 @@ class MainClass extends PluginBase implements Listener{
 	public function onBreak(BlockBreakEvent $event){
 		$player = $event->getPlayer();
 		$name = $player->getName();
-		$item = $event->getDrops();
+		$drop = $event->getDrops();
                 $level=$player->getLevel();
                 $x = floor($player->getX());
                 $z = floor($player->getZ());
