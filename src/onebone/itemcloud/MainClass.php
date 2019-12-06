@@ -309,8 +309,8 @@ class MainClass extends PluginBase implements Listener{
                 $z = floor($player->getZ());
                 $this->land = EconomyLand::getInstance();
                 $info= $this->land->getowner($x,$z,$level);
-                if($info === false || $name==$info[owner]){
-			if(!$player-isOp()){
+                if($info === false || $name==$info['owner']){
+			if(!$player->isOp()){
 				if($this->breakdate->exists($name) || $this->breakdate->exists("allbreakdate")){
 					if(!isset($this->clouds[strtolower($name)])){
 						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
