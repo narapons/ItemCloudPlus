@@ -318,7 +318,7 @@ class MainClass extends PluginBase implements Listener{
 				        }else{
 					        $event->setDrops([]);
                                                 foreach($drop as $item){
-                                                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), 1, true);
+                                                        $this->clouds[strtolower($name)]->addItemBreak($item->getID(), $item->getDamage(), $item->getCount(), true);
                                                 }
 					}
 				}
