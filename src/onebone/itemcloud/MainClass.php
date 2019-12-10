@@ -83,7 +83,7 @@ class MainClass extends PluginBase implements Listener{
 		switch($command->getName()){
 			case "itemcloud":
 				if(!$sender instanceof Player){
-					$sender->sendMessage("Please run this command in-game");
+					$sender->sendMessage("§cゲーム内で実行してください");
 					return true;
 				}
 				$sub = array_shift($params);
@@ -95,20 +95,20 @@ class MainClass extends PluginBase implements Listener{
 							return true;
 						}
 						if(isset($this->clouds[strtolower($sender->getName())])){
-							$sender->sendMessage("[ItemCloud] You already have an ItemCloud account");
+							$sender->sendMessage("[ItemCloud] §cあなたはアカウントを作成済みです");
 							break;
 						}
 						$this->clouds[strtolower($sender->getName())] = new ItemCloud([], $sender->getName());
-						$sender->sendMessage("[ItemCloud] Registered with ItemCloud");
+						$sender->sendMessage("[ItemCloud] §eあなたのアカウントを作成しました");
 						break;
 					case "upload":
 					case "up":
 						if(!$sender->hasPermission("itemcloud.command.upload")){
-							$sender->sendMessage(TextFormat::RED . "You don't have permission to use this command.");
+							$sender->sendMessage(TextFormat::RED . "§cコマンドを実行する権限がありません");
 							return true;
 						}
 						if(!isset($this->clouds[strtolower($sender->getName())])){
-							$sender->sendMessage("[ItemCloud] Please register with ItemCloud first.");
+							$sender->sendMessage("[ItemCloud] §cアカウントを作成してください");
 							break;
 						}
 						$item = array_shift($params);
@@ -133,20 +133,20 @@ class MainClass extends PluginBase implements Listener{
 						}
 						if($amount <= $count){
 							$this->clouds[strtolower($sender->getName())]->addItem($item->getID(), $item->getDamage(), $amount, true);
-							$sender->sendMessage("[ItemCloud] Uploaded your items to ItemCloud");
+							$sender->sendMessage("[ItemCloud] §eアップロードしました");
 						}else{
-							$sender->sendMessage("[ItemCloud] You don't have enough items to upload.");
+							$sender->sendMessage("[ItemCloud] §cアイテムが足りません");
 						}
 						break;
 					case "download":
 					case "down":
 						if(!$sender->hasPermission("itemcloud.command.download")){
-							$sender->sendMessage(TextFormat::RED . "You don't have permission to use this command.");
+							$sender->sendMessage(TextFormat::RED . "§cコマンドを実行する権限がありません");
 							return true;
 						}
 						$name = strtolower($sender->getName());
 						if(!isset($this->clouds[$name])){
-							$sender->sendMessage("[ItemCloud] Please register with ItemCloud first.");
+							$sender->sendMessage("[ItemCloud] §cアカウントを作成してください");
 							break;
 						}
 						$item = array_shift($params);
@@ -164,26 +164,26 @@ class MainClass extends PluginBase implements Listener{
 						$item->setCount($amount);
 
 						if(!$this->clouds[$name]->itemExists($item->getID(), $item->getDamage(), $amount)){
-							$sender->sendMessage("[ItemCloud] You don't have enough items in your account.");
+							$sender->sendMessage("[ItemCloud] §cアイテムが足りません");
 							break;
 						}
 
 						if($sender->getInventory()->canAddItem($item)){
 							$this->clouds[$name]->removeItem($item->getID(), $item->getDamage(), $amount);
 							$sender->getInventory()->addItem($item);
-							$sender->sendMessage("[ItemCloud] You have downloaded items from the ItemCloud account.");
+							$sender->sendMessage("[ItemCloud] §eダウンロードしました");
 						}else{
-							$sender->sendMessage("[ItemCloud] You have no space to download items.");
+							$sender->sendMessage("[ItemCloud] §cインベントリに空きがありません");
 						}
 						break;
 					case "list":
 						if(!$sender->hasPermission("itemcloud.command.list")){
-							$sender->sendMessage(TextFormat::RED . "You don't have permission to use this command.");
+							$sender->sendMessage(TextFormat::RED . "§cコマンドを実行する権限がありません");
 							return true;
 						}
 						$name = strtolower($sender->getName());
 						if(!isset($this->clouds[$name])){
-							$sender->sendMessage("[ItemCloud] Please register with ItemCloud first.");
+							$sender->sendMessage("[ItemCloud] §cアカウントを作成してください");
 							break;
 						}
 						$output = "[ItemCloud] Item list : \n";
@@ -194,12 +194,12 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "count":
 						if(!$sender->hasPermission("itemcloud.command.count")){
-							$sender->sendMessage(TextFormat::RED . "You don't have permission to use this command.");
+							$sender->sendMessage(TextFormat::RED . "§cコマンドを実行する権限がありません");
 							return true;
 						}
 						$name = strtolower($sender->getName());
 						if(!isset($this->clouds[$name])){
-							$sender->sendMessage("[ItemCloud] Please register with ItemCloud first.");
+							$sender->sendMessage("[ItemCloud] §cアカウントを作成してください");
 							return true;
 						}
 						$item = array_shift($params);
@@ -221,53 +221,53 @@ class MainClass extends PluginBase implements Listener{
 						$user_name = $sender->getName();
 						if(!$this->breakdate->exists("allbreakdate")){
 							if($this->breakdate->exists($user_name)){
-								$sender->sendMessage("[ItemCloud] 既に有効です。");
+								$sender->sendMessage("[ItemCloud] §c既に有効です。");
 						        }else{
 								$this->breakdate->set($user_name,count($this->breakdate->getAll())+1);
 							        $this->breakdate->save();
 							        $this->breakdate->reload();
-						                $sender->sendMessage("[ItemCloud] ブロックを壊すと直接アイテムクラウドに行くようになりました。");
+						                $sender->sendMessage("[ItemCloud] §eブロックを壊すと直接アイテムクラウドに行くようになりました。");
 						        }
 						}else{
-							$sender->sendMessage("[ItemCloud] 管理者によって設定が固定されているため変更できません");
+							$sender->sendMessage("[ItemCloud] §c管理者によって設定が固定されているため変更できません");
 						}
 						break;
 					case "offbreak":
 						$user_name = $sender->getName();
 						if(!$this->breakdate->exists("allbreakdate")){
 							if(!$this->breakdate->exists($user_name)){
-								$sender->sendMessage("[ItemCloud] 既に無効です。");
+								$sender->sendMessage("[ItemCloud] §c既に無効です。");
 						        }else{
 							        $this->breakdate->remove($user_name);
-								$sender->sendMessage("[ItemCloud] ブロックを壊しても直接アイテムクラウドに行かなくなりました。");
+								$sender->sendMessage("[ItemCloud] §eブロックを壊しても直接アイテムクラウドに行かなくなりました。");
 						        }
 						}else{
-							$sender->sendMessage("[ItemCloud] 管理者によって設定が固定されているため変更できません");
+							$sender->sendMessage("[ItemCloud] §c管理者によって設定が固定されているため変更できません");
 						}
 						break;
 					case "allonbreak":
 						if($sender->isOp()){
 							if($this->breakdate->exists("allbreakdate")){
-								$sender->sendMessage("[Itemcloud] 既に有効です。");
+								$sender->sendMessage("[Itemcloud] §c既に有効です。");
 					                }else{
 							        $this->breakdate->set("allbreakdate", "allbreak");
 							        $this->breakdate->save();
 							        $this->breakdate->reload();
-						                $sender->sendMessage("[ItemCloud] 全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
+						                $sender->sendMessage("[ItemCloud] §e全員を対象にブロックを壊すと直接アイテムクラウドに行くようになりました。");
 							}
 	     			  	        }else{
-							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
+							$sender->sendMessage("§cコマンドを実行する権限がありません。");
 						}
 						break;
 					case "playerbreak":
 						if($sender->isOp()){
 							if(!$this->breakdate->exists("allbreakdate")){
-								$sender->sendMessage("[Itemcloud] 既に無効です。");
+								$sender->sendMessage("[Itemcloud] §c既に無効です。");
 					                }else{
 							        $this->breakdate->remove("allbreakdate");
 						      	        $this->breakdate->save();
 							        $this->breakdate->reload();
-						                $sender->sendMessage("[ItemCloud] 全員を対象とする設定が無効になりました。");
+						                $sender->sendMessage("[ItemCloud] §e全員を対象とする設定が無効になりました。");
 							}
 	     			  	        }else{
 							$sender->sendMessage("§cこのコマンドを実行する権限がありません。");
@@ -275,7 +275,7 @@ class MainClass extends PluginBase implements Listener{
 						break;
 					case "all":
 						if(!isset($this->clouds[strtolower($sender->getName())])){
-							$sender->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+							$sender->sendMessage("[ItemCloud] §eアカウントを作成してください");
 						}else{
 							$si = $sender->getInventory()->getSize();
 							for($is = 1; $is <= $si; ++$is){
@@ -289,7 +289,7 @@ class MainClass extends PluginBase implements Listener{
 								}
 							}	
 							$sender->getInventory()->clearAll();
-							$sender->sendMessage("[ItemClude] インベントリにあるアイテムをすべてアップロードしました");
+							$sender->sendMessage("[ItemClude] §eインベントリにあるアイテムをすべてアップロードしました");
 						}
 						break;	
 			  	        default:
@@ -313,7 +313,7 @@ class MainClass extends PluginBase implements Listener{
 			if(!$player->isOp()){
 				if($this->breakdate->exists($name) || $this->breakdate->exists("allbreakdate")){
 					if(!isset($this->clouds[strtolower($name)])){
-						$player->sendMessage("[ItemCloud] ItemCloudのアカウントがありません。作成してください。");
+						$player->sendMessage("[ItemCloud] §cアカウントを作成してください");
 				                $event->setCancelled();
 				        }else{
 					        $event->setDrops([]);
